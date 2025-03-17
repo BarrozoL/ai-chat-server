@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
 
+mongoose.connection.on("connected", () => {
+  console.log("Mongoose connected to MongoDB");
+});
+
+mongoose.connection.on("error", (err) => {
+  console.error("Mongoose connection error:", err);
+});
+
 //Connect to DB
 async function connectDB() {
   try {
@@ -7,6 +15,7 @@ async function connectDB() {
     console.log("Connected to MongoDB");
   } catch (err) {
     console.error("Error connecting to MongoDB", err);
+    throw err;
   }
 }
 

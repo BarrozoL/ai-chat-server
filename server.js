@@ -4,13 +4,15 @@ const app = require("./app.js");
 dotenv.config();
 
 //Call the function to connect to DB
-connectDB();
-
-//Start the server
-const PORT = process.env.PORT || 5005;
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+connectDB()
+  .then(() => {
+    console.log("MongoDB connected. Starting server...");
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error("Failed to connect to MongoDB", error);
+  });
 
 module.exports = app;
