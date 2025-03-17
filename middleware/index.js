@@ -9,6 +9,7 @@ const isAuthenticated = require("./isAuthenticated.middleware");
 const indexRoutes = require("../routes/index.routes");
 const userRoutes = require("../routes/user.routes");
 const protectedRoutes = require("../routes/protected.routes");
+const aiChatRoutes = require("../routes/ai-chat.routes");
 
 module.exports = (app) => {
   app.set("trust proxy", 1);
@@ -24,6 +25,8 @@ module.exports = (app) => {
 
   //Routes
   app.use("/", indexRoutes);
+
+  app.use("/ai", aiChatRoutes);
 
   app.use("/auth", userRoutes);
 
